@@ -2,6 +2,7 @@
 #include "DemodulatorFM.h"
 using namespace std;
 
+//Проверяет обработку пустого входного сигнала
 TEST(DemodulatorFM, EmptySignal)
 {
     DemodulatorFM demod;
@@ -13,6 +14,7 @@ TEST(DemodulatorFM, EmptySignal)
     EXPECT_TRUE(result.empty());
 }
 
+//Проверяет размер выходного сигнала при FM-демодуляции
 TEST(DemodulatorFM, OutputSize)
 {
     DemodulatorFM demod;
@@ -30,6 +32,7 @@ TEST(DemodulatorFM, OutputSize)
     EXPECT_EQ(result.size(), signal.size() - 1);
 }
 
+//Проверяет демодуляцию сигнала с постоянной фазой
 TEST(DemodulatorFM, ConstantPhase)
 {
     DemodulatorFM demod;
@@ -50,6 +53,8 @@ TEST(DemodulatorFM, ConstantPhase)
     }
 }
 
+
+//Проверяет обработку сигнала из одного отсчета
 TEST(DemodulatorFM, OneSample)
 {
     DemodulatorFM demod;
