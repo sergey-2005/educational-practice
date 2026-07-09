@@ -1,13 +1,14 @@
 #include <gtest/gtest.h>
 #include "DemodulatorAM.h"
+using namespace std;
 
 TEST(DemodulatorAM, EmptySignal)
 {
     DemodulatorAM demod;
 
-    std::vector<Complex> signal;
+    vector<Complex> signal;
 
-    auto result = demod.Demodulate(signal);
+     vector<float> result = demod.Demodulate(signal);
 
     EXPECT_TRUE(result.empty());
 }
@@ -16,14 +17,32 @@ TEST(DemodulatorAM, SizeCheck)
 {
     DemodulatorAM demod;
 
-    std::vector<Complex> signal =
+    vector<Complex> signal =
     {
         {1,0},
         {0,1},
         {1,1}
     };
 
-    auto result = demod.Demodulate(signal);
+    vector<float> result = demod.Demodulate(signal);
 
     EXPECT_EQ(result.size(), signal.size());
+}
+
+TEST(DemodulatorAM, ConstantAmplitude)
+{
+    DemodulatorAM demod;
+
+    vector<Complex> signal =
+    {
+        {3, 4},
+        {3, 4},
+        {3, 4}
+    };
+
+    vector<float> result = demod.Demodulate(signal);
+
+    EXPECT_FLOAT_EQ(result[0], 5.0f);
+    EXPECT_FLOAT_EQ(result[1], 5.0f);
+    EXPECT_FLOAT_EQ(result[2], 5.0f);
 }
