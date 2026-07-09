@@ -2,6 +2,7 @@
 #include "DemodulatorAM.h"
 using namespace std;
 
+//Проверяет обработку пустого входного сигнала
 TEST(DemodulatorAM, EmptySignal)
 {
     DemodulatorAM demod;
@@ -13,6 +14,7 @@ TEST(DemodulatorAM, EmptySignal)
     EXPECT_TRUE(result.empty());
 }
 
+//Проверяет сохранение размера сигнала после демодуляци
 TEST(DemodulatorAM, SizeCheck)
 {
     DemodulatorAM demod;
@@ -29,6 +31,7 @@ TEST(DemodulatorAM, SizeCheck)
     EXPECT_EQ(result.size(), signal.size());
 }
 
+// Проверяет демодуляцию сигнала с постоянной амплитудой
 TEST(DemodulatorAM, ConstantAmplitude)
 {
     DemodulatorAM demod;
