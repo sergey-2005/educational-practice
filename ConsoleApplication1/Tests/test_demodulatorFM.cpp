@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "DemodulatorFM.h"
+using namespace std;
 
 TEST(DemodulatorFM, EmptySignal)
 {
@@ -7,7 +8,7 @@ TEST(DemodulatorFM, EmptySignal)
 
     std::vector<Complex> signal;
 
-    auto result = demod.Demodulate(signal);
+    vector<float> result = demod.Demodulate(signal);
 
     EXPECT_TRUE(result.empty());
 }
@@ -24,7 +25,41 @@ TEST(DemodulatorFM, OutputSize)
         {0,-1}
     };
 
-    auto result = demod.Demodulate(signal);
+    vector<float> result = demod.Demodulate(signal);
 
     EXPECT_EQ(result.size(), signal.size() - 1);
+}
+
+TEST(DemodulatorFM, ConstantPhase)
+{
+    DemodulatorFM demod;
+
+    vector<Complex> signal =
+    {
+        {1, 0},
+        {1, 0},
+        {1, 0},
+        {1, 0}
+    };
+
+    vector<float> result = demod.Demodulate(signal);
+
+    for (float value : result)
+    {
+        EXPECT_FLOAT_EQ(value, 0.0f);
+    }
+}
+
+TEST(DemodulatorFM, OneSample)
+{
+    DemodulatorFM demod;
+
+    vector<Complex> signal =
+    {
+        {1, 0}
+    };
+
+    vector<float> result = demod.Demodulate(signal);
+
+    EXPECT_TRUE(result.empty());
 }
