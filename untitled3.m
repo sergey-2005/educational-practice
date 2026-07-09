@@ -11,6 +11,9 @@ file_bin = 'file1EuropaPlus.bin'; % 72 482 816 байт => FM
 file_dat = 'am_sound.dat';% 3 276 800 байт => AM
 %% 1. ОБРАБОТКА AM (файл .dat), int - 4 байта определил перебором
 fprintf(' 1. ОБРАБОТКА AM (Файл .dat) \n');
+if ~exist(file_dat, 'file')
+    error('Файл %s не найден!', file_dat);
+end
 fid = fopen(file_dat, 'rb');
 am_raw = fread(fid, 'int');
 fclose(fid);
@@ -54,6 +57,9 @@ am_filtered_rec = am_filtered_rec / max(abs(am_filtered_rec));
 fprintf('AM: Длительность = %.2f секунд\n\n', length(am_filtered)/Fs_AM);
 %% 2. Обработка FM (Файл .bin), тоже int - 4байта, определил также перебором
 fprintf('2. ОБРАБОТКА FM (Файл .bin)\n');
+if ~exist(file_bin, 'file')
+    error('Файл %s не найден!', file_bin);
+end
 fid = fopen(file_bin, 'rb');
 fm_raw = fread(fid, 'int'); 
 fclose(fid);
