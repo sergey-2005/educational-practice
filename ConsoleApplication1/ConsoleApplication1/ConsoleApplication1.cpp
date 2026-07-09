@@ -35,6 +35,12 @@ int main()
     // файл .bin
     FileManager fm;
     vector<Complex> fmsignal = fm.LoadSignal("file1EuropaPlus.bin");
+    if (fmsignal.empty())
+    {
+        cerr << "ERROR: Failed to load file1EuropaPlus.bin" << endl;
+        cerr << "File not found or empty!" << endl;
+        return 1; // Завершаем программу с ошибкой
+    }
     DemodulatorFM fmdemod;
     vector<float> fmAudio = fmdemod.Demodulate(fmsignal);
     Filter fmFilter(10, type);
@@ -48,6 +54,12 @@ int main()
     writer.Save(fmAudio, "fm_audio.wav", 50000);
     // файл .dat
     vector<Complex> amsignal = fm.LoadSignal("am_sound.dat");
+    if (amsignal.empty())
+    {
+        cerr << "ERROR: Failed to load am_sound.dat" << endl;
+        cerr << "File not found or empty!" << endl;
+        return 1; // Завершаем программу с ошибкой
+    }
     DemodulatorAM amDemod;
     vector<float> amAudio = amDemod.Demodulate(amsignal);
     Filter amFilter(5, type);
