@@ -7,7 +7,7 @@ TEST(DemodulatorFM, EmptySignal)
 {
     DemodulatorFM demod;
 
-    std::vector<Complex> signal;
+    vector<Complex> signal;
 
     vector<float> result = demod.Demodulate(signal);
 
@@ -19,7 +19,7 @@ TEST(DemodulatorFM, OutputSize)
 {
     DemodulatorFM demod;
 
-    std::vector<Complex> signal =
+    vector<Complex> signal =
     {
         {1,0},
         {0,1},
